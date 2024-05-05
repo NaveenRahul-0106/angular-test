@@ -29,8 +29,6 @@ jobs:
       with:
         name: dist
         path: dist
-  - name: Run CI
-    run: npm ci
 
     - name: Publish
       env:
