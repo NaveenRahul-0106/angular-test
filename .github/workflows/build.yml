@@ -31,8 +31,8 @@ jobs:
 
     - name: Publish
       env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      run: echo "//npm.pkg.github.com/:_authToken=${{ secrets.GITHUB_TOKEN }}" > ~/.npmrc && npm publish dist --access public
+        GITHUB_TOKEN: ${{ secrets.NPM_TOKEN }}
+      run: echo "//npm.pkg.github.com/:_authToken=${{ secrets.NPM_TOKEN }}" > ~/.npmrc && npm publish dist --access public
 
     # - name: Run tests
     #   run: npm test
