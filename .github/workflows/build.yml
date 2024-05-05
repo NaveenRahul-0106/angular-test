@@ -32,8 +32,9 @@ jobs:
       with:
         name: dist
         path: dist
+        
     - name: Authenticate with GitHub Packages
-      run: echo "//npm.pkg.github.com/:_authToken=${{ secrets.NPM_TH }}" > ~/.npmrc
+      run: echo "//npm.pkg.github.com/:_authToken=${{ secrets.NPM_TK }}" > ~/.npmrc
 
     - name: Publish to GitHub Packages
       run: npm publish --registry=https://npm.pkg.github.com/
