@@ -35,7 +35,7 @@ jobs:
 
     - name: Publish to GitHub Packages
       run: |
-        echo "//npm.pkg.github.com/:_authToken=${{ secrets.NPM_TOKEN }}" > .npmrc
+        echo "//npm.pkg.github.com/:_authToken=${{ secrets.NPM_TH }}" > .npmrc
         npm publish --registry=https://npm.pkg.github.com/
     
     # - name: Run tests
