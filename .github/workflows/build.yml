@@ -29,11 +29,12 @@ jobs:
       with:
         name: dist
         path: dist
+  - name: Run CI
+    run: npm ci
 
     - name: Publish
       env:
         GITHUB_TOKEN: ${{ secrets.NPM_TOKEN }}
-      run: npm ci
       run: echo "//npm.pkg.github.com/:_authToken=${{ secrets.NPM_TOKEN }}" > ~/.npmrc && npm publish dist --access public
 
     # - name: Run tests
