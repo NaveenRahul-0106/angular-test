@@ -7,7 +7,7 @@ on:
     tags:
       - '*.*.*'
       - '*.*.*-*'
-
+      
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -30,6 +30,11 @@ jobs:
         run: |
           # This step runs for all pushes, including tag pushes and non-tag pushes
           echo "This step runs for all pushes"
+
+
+
+
+
 
 # name: Build and Test
 
