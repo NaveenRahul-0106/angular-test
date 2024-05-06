@@ -1,41 +1,4 @@
-# name: CI
-
-# on:
-#   push:
-#     branches:
-#       - master
-#     tags:
-#       - '*.*.*'
-#       - '*.*.*-*'
-      
-# jobs:
-#   build:
-#     runs-on: ubuntu-latest
-
-#     steps:
-#       - name: Check if it's a tag push
-#         id: is_tag_push
-#         run: echo ::set-output name=is_tag_push::$(if [[ "${GITHUB_REF}" =~ ^refs/tags/[0-9]+\.[0-9]+\.[0-9]+$ || "${GITHUB_REF}" =~ ^refs/tags/[0-9]+\.[0-9]+\.[0-9]+\-.+$ ]]; then echo true; else echo false; fi)
-
-#       - name: Checkout code
-#         uses: actions/checkout@v2
-
-#       - name: Run my step
-#         if: steps.is_tag_push.outputs.is_tag_push == 'true'
-#         run: |
-#           # Your command for the step goes here
-#           echo "This is a tag push"
-#           echo ${{ github.ref }}
-#           echo ${{ github.ref_name }}
-      
-#       - name: Another step
-#         run: |
-#           # This step runs for all pushes, including tag pushes and non-tag pushes
-#           echo "This step runs for all pushes"
-#           echo ${{ github.ref_name }}
-#           echo ${{ github.token }}
-          
-name: Build and Test
+name: CI
 
 on:
   push:
@@ -44,58 +7,95 @@ on:
     tags:
       - '*.*.*'
       - '*.*.*-*'
+      
 jobs:
   build:
     runs-on: ubuntu-latest
+
     steps:
+      # - name: Check if it's a tag push
+      #   id: is_tag_push
+      #   run: echo ::set-output name=is_tag_push::$(if [[ "${GITHUB_REF}" =~ ^refs/tags/[0-9]+\.[0-9]+\.[0-9]+$ || "${GITHUB_REF}" =~ ^refs/tags/[0-9]+\.[0-9]+\.[0-9]+\-.+$ ]]; then echo true; else echo false; fi)
+
       - name: Checkout code
         uses: actions/checkout@v2
 
-      - name: Set up Node.js
-        uses: actions/setup-node@v2
-        with:
-          node-version: '20.x'
-          registry-url: 'https://npm.pkg.github.com'
-          scope: '@NaveenRahul-0106'
+      - name: Run my step
+        if: [[ ${{ github.ref }} != /ref/tags/* ]]
+        run: |
+          # Your command for the step goes here
+          echo "This is a tag push"
+          echo ${{ github.ref }}
+          echo ${{ github.ref_name }}
+      
+      - name: Another step
+        run: |
+          # This step runs for all pushes, including tag pushes and non-tag pushes
+          echo "This step runs for all pushes"
+          echo ${{ github.ref_name }}
+          echo ${{ github.token }}
+          
+# name: Build and Test
 
-      - name: Install dependencies
-        run: npm install
+# on:
+#   push:
+#     branches:
+#       - master
+#     tags:
+#       - '*.*.*'
+#       - '*.*.*-*'
+# jobs:
+#   build:
+#     runs-on: ubuntu-latest
+#     steps:
+#       - name: Checkout code
+#         uses: actions/checkout@v2
 
-      - name: Build Angular app
-        run: npm run build 
+#       - name: Set up Node.js
+#         uses: actions/setup-node@v2
+#         with:
+#           node-version: '20.x'
+#           registry-url: 'https://npm.pkg.github.com'
+#           scope: '@NaveenRahul-0106'
 
-      # - name: Archive production artifacts
-      #   uses: actions/upload-artifact@v2
-      #   with:
-      #     name: dist
-      #     path: dist
+#       - name: Install dependencies
+#         run: npm install
 
-      # - name: Print Token
-      #   run: echo ${{ secrets.GH_PAT }}
+#       - name: Build Angular app
+#         run: npm run build 
 
-      # - name: Authenticate with GitHub Packages
-      #   run: echo "//npm.pkg.github.com/:_authToken=${{ secrets.GH_PAT }}" > ~/.npmrc
+#       # - name: Archive production artifacts
+#       #   uses: actions/upload-artifact@v2
+#       #   with:
+#       #     name: dist
+#       #     path: dist
 
-      # - name: echo token
-      #   run: echo ~/.npmrc
+#       # - name: Print Token
+#       #   run: echo ${{ secrets.GH_PAT }}
 
-      - name: Publish to GitHub Packages
-        run: npm publish 
-        env:
-          NODE_AUTH_TOKEN: ${{secrets.GITHUB_TOKEN}}
+#       # - name: Authenticate with GitHub Packages
+#       #   run: echo "//npm.pkg.github.com/:_authToken=${{ secrets.GH_PAT }}" > ~/.npmrc
 
-    # - name: Bump version
-    #   if: startsWith(github.ref, 'refs/tags/')
-    #   run: npm version patch
-# secrets.GH_PAT
-    # - name: Publish to GitHub Packages
-    #   if: startsWith(github.ref, 'refs/tags/')
-    #   run: echo hello
+#       # - name: echo token
+#       #   run: echo ~/.npmrc
 
-    # - name: Publish to GitHub Packages
-    #   run: |
-    #     echo "//npm.pkg.github.com/:_authToken=${{ secrets.GH_PAT }}" > .npmrc
-    #     npm publish --registry=https://npm.pkg.github.com/
+#       - name: Publish to GitHub Packages
+#         run: npm publish 
+#         env:
+#           NODE_AUTH_TOKEN: ${{secrets.GITHUB_TOKEN}}
+
+#     # - name: Bump version
+#     #   if: startsWith(github.ref, 'refs/tags/')
+#     #   run: npm version patch
+# # secrets.GH_PAT
+#     # - name: Publish to GitHub Packages
+#     #   if: startsWith(github.ref, 'refs/tags/')
+#     #   run: echo hello
+
+#     # - name: Publish to GitHub Packages
+#     #   run: |
+#     #     echo "//npm.pkg.github.com/:_authToken=${{ secrets.GH_PAT }}" > .npmrc
+#     #     npm publish --registry=https://npm.pkg.github.com/
     
-    # - name: Run tests
-    #   run: npm test
+#     # - name: Run tests
+#     #   run: npm test
