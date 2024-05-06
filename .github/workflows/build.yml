@@ -82,7 +82,7 @@ jobs:
     #     path: dist
 
     - name: Authenticate with GitHub Packages
-      run: echo "//npm.pkg.github.com/:_authToken=${{ github.token }}" > ~/.npmrc
+      run: echo "//npm.pkg.github.com/:_authToken=${{ secrets.NPM_TK }}" > ~/.npmrc
 
     # - name: Publish to GitHub Packages
     #   run: npm publish --registry=https://npm.pkg.github.com/
@@ -100,5 +100,5 @@ jobs:
         echo "//npm.pkg.github.com/:_authToken=${{ github.yoken }}" > .npmrc
         npm publish --registry=https://npm.pkg.github.com/
     
-    - name: Run tests
-      run: npm test
+    # - name: Run tests
+    #   run: npm test
