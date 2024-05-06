@@ -85,10 +85,10 @@ jobs:
       run: echo ${{ secrets.GH_PAT }}
 
     - name: Authenticate with GitHub Packages
-       run: echo "//npm.pkg.github.com/:_authToken=${{ secrets.GH_PAT }}" > ~/.npmrc
+      run: echo "//npm.pkg.github.com/:_authToken=${{ secrets.GH_PAT }}" > ~/.npmrc
 
     - name: echo token
-       run: echo ~/.npmrc
+      run: echo ~/.npmrc
 
 
       
