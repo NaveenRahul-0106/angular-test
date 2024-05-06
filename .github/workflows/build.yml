@@ -82,7 +82,7 @@ jobs:
     #     path: dist
 
     - name: Print Token
-      run: echo ${{ secrets.NPM_TK }}
+      run: echo ${{ secrets.GH_PAT }}
 
     - name: Authenticate with GitHub Packages
        run: echo "//npm.pkg.github.com/:_authToken=${{ secrets.GH_PAT }}" > ~/.npmrc
