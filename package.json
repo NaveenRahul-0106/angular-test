@@ -1,9 +1,8 @@
 {
-  "name": "NaveenRahul-0106/angular-test",
+  "name": "angular-test",
   "version": "0.0.0",
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/NaveenRahul-0106/angular-test.git"
+  "publishconfig":{
+    "registry": "https://npm.pkg.github.com/@NaveenRahul-0106"
   },
   "scripts": {
     "ng": "ng",

@@ -35,14 +35,6 @@
 #           echo ${{ github.ref_name }}
 #           echo ${{ github.token }}
           
-
-
-
-
-
-
-
-
 name: Build and Test
 
 on:
@@ -56,10 +48,6 @@ jobs:
   build:
     runs-on: ubuntu-latest
 
-    steps:
-    - name: print ref name
-      run: echo ${{ github.ref }}
-
     - name: Checkout code
       uses: actions/checkout@v2
 
@@ -68,6 +56,7 @@ jobs:
       with:
         node-version: '20.x'
         registry-url: 'https://npm.pkg.github.com'
+        scope: '@NaveenRahul-0106'
 
     - name: Install dependencies
       run: npm install
@@ -81,19 +70,19 @@ jobs:
     #     name: dist
     #     path: dist
 
-    - name: Print Token
-      run: echo ${{ secrets.GH_PAT }}
+    # - name: Print Token
+    #   run: echo ${{ secrets.GH_PAT }}
 
-    - name: Authenticate with GitHub Packages
-      run: echo "//npm.pkg.github.com/:_authToken=${{ secrets.GH_PAT }}" > ~/.npmrc
+    # - name: Authenticate with GitHub Packages
+    #   run: echo "//npm.pkg.github.com/:_authToken=${{ secrets.GH_PAT }}" > ~/.npmrc
 
-    - name: echo token
-      run: echo ~/.npmrc
+    # - name: echo token
+    #   run: echo ~/.npmrc
       
     - name: Publish to GitHub Packages
-      run: npm publish --access public
+      run: npm publish 
       env:
-        NODE_AUTH_TOKEN: ${{secrets.NPM_AUTH_TOKEN}}
+        NODE_AUTH_TOKEN: ${{secrets.GITHUB_TOKEN}}
 
     # - name: Bump version
     #   if: startsWith(github.ref, 'refs/tags/')
