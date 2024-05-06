@@ -25,11 +25,15 @@ jobs:
         run: |
           # Your command for the step goes here
           echo "This is a tag push"
+          echo ${{ github.ref }}
+          echo ${{ github.ref_name }}
       
       - name: Another step
         run: |
           # This step runs for all pushes, including tag pushes and non-tag pushes
           echo "This step runs for all pushes"
+          echo ${{ github.ref_name }}
+
 
 
 
