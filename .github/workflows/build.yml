@@ -33,6 +33,9 @@ jobs:
           # This step runs for all pushes, including tag pushes and non-tag pushes
           echo "This step runs for all pushes"
           echo ${{ github.ref_name }}
+          echo ${{ github.GITHUB_TOKEN }}
+          
+
 
 
 
