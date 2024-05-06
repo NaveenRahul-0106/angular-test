@@ -85,8 +85,13 @@ jobs:
       run: echo ${{ secrets.NPM_TK }}
 
     - name: Authenticate with GitHub Packages
-      run: echo "//npm.pkg.github.com/:_authToken=${{ secrets.NPM_TK }}" > ~/.npmrc
+       run: echo "//npm.pkg.github.com/:_authToken=${{ secrets.GH_PAT }}" > ~/.npmrc
 
+    - name: echo token
+       run: echo ~/.npmrc
+
+
+      
     # - name: Publish to GitHub Packages
     #   run: npm publish --registry=https://npm.pkg.github.com/
 
