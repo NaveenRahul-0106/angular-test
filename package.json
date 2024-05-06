@@ -1,7 +1,7 @@
 {
   "name": "angular-test",
   "version": "0.0.0",
-  "publishconfig":{
+  "publishConfig":{
     "registry": "https://npm.pkg.github.com/@NaveenRahul-0106"
   },
   "scripts": {
