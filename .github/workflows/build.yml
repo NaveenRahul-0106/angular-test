@@ -24,12 +24,20 @@ jobs:
           echo "This is a tag push"
           echo ${{ github.ref }}
           echo ${{ github.ref_name }}
-          if [[ "${{github.ref}}" =~ ^refs/tags/[0-9]+\.[0-9]+\.[0-9]+$ || "${{github.ref}}" =~ ^refs/tags/[0-9]+\.[0-9]+\.[0-9]+\-.+$ ]] && [[ "${{github.ref_name}}" != master ]]; then
-          echo "publish"
+
+          if [[ ${{ github.ref}} != /refs/tags/* ]];then
+          echo "donot publish"
           else
-          echo "do not publish"
+          echo "publish"
           fi
-      
+          
+      # if [[ "${{github.ref}}" =~ ^refs/tags/[0-9]+\.[0-9]+\.[0-9]+$ || "${{github.ref}}" =~ ^refs/tags/[0-9]+\.[0-9]+\.[0-9]+\-.+$ ]] && [[ "${{github.ref_name}}" != master ]]; then
+      #     echo "publish"
+      #     else
+      #     echo "do not publish"
+      #     fi
+
+
       # - name: Another step
       #   run: |
       #     # This step runs for all pushes, including tag pushes and non-tag pushes
