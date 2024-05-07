@@ -11,29 +11,31 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
-
     steps:
-      - name: Check if it's a tag push
-        id: is_tag_push
-        run: echo ::set-output name=is_tag_push::$(if [[ "${GITHUB_REF}" =~ ^refs/tags/[0-9]+\.[0-9]+\.[0-9]+$ || "${GITHUB_REF}" =~ ^refs/tags/[0-9]+\.[0-9]+\.[0-9]+\-.+$ ]]; then echo true; else echo false; fi)
-
+      # - name: Check if it's a tag push
+      #   id: is_tag_push
+      #   run: echo ::set-output name=is_tag_push::$(if [[ "${GITHUB_REF}" =~ ^refs/tags/[0-9]+\.[0-9]+\.[0-9]+$ || "${GITHUB_REF}" =~ ^refs/tags/[0-9]+\.[0-9]+\.[0-9]+\-.+$ ]]; then echo true; else echo false; fi)
       - name: Checkout code
         uses: actions/checkout@v2
-
-      - name: Run my step
-        if: steps.is_tag_push.outputs.is_tag_push == 'true'
+      - name: Run publish
+        # if: steps.is_tag_push.outputs.is_tag_push == 'true'
         run: |
           # Your command for the step goes here
           echo "This is a tag push"
           echo ${{ github.ref }}
           echo ${{ github.ref_name }}
+          if [[ ${{ github.ref }} != /refs/tags/* ]]; then
+          echo "do not publish"
+          else
+          echo "publish"
+          fi
       
-      - name: Another step
-        run: |
-          # This step runs for all pushes, including tag pushes and non-tag pushes
-          echo "This step runs for all pushes"
-          echo ${{ github.ref_name }}
-          echo ${{ github.token }}
+      # - name: Another step
+      #   run: |
+      #     # This step runs for all pushes, including tag pushes and non-tag pushes
+      #     echo "This step runs for all pushes"
+      #     echo ${{ github.ref_name }}
+      #     echo ${{ github.token }}
           
 # name: Build and Test
 
